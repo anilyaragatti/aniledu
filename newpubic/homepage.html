@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | EduConnect</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+ <!-- START: Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">EduConnect</div>
+    <ul class="nav-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="careermain.html">Career</a></li>
+      <li><a href="notes.html">Notes</a></li>
+      <li><a href="forum.html">Forum</a></li>
+      <li><a href="chatbot.html">Chatbot</a></li>
+       <li><a href="chatbot.html">college Timetable</a></li>
+        <li><a href="chatbot.html">media & Notices</a></li>
+
+    </ul>
+  </nav>
+  <!-- END: Navigation Bar -->
+
+
+
+  <header class="hero-section">
+    <h1 class="title">Welcome to EduConnect</h1>
+    <p class="subtitle">Empowering Students Through Smart Education</p>
+  </header>
+
+  <section class="intro">
+    <h2>About the Project</h2>
+    <p>
+      EduConnect is a centralized educational platform designed to help students and faculty communicate, collaborate, and grow together. Our mission is to simplify the learning process through technology.
+    </p>
+  </section>
+
+  <section class="features">
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Smart Chatbot</h3>
+        <p>Instant doubt-solving assistant powered by AI for students 24/7.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Notes Sharing</h3>
+        <p>Teachers can upload and students can download class notes anytime.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Forum</h3>
+        <p>Ask questions, help peers, and build a strong academic community.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Career Guidance</h3>
+        <p>Explore roadmaps, learning platforms, and DSA sheets to succeed.</p>
+      </div>
+      <div class="feature-card">
+        <h3>College Timetable</h3>
+        <p>Stay on track with your classes and events with real-time updates.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Media & Notices</h3>
+        <p>Get all updates, images, and announcements in one place.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EduConnect. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+<style>
+    
+    body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f8ff;
+  color: #222;
+  overflow-x: hidden;
+}
+
+.hero-section {
+  background: linear-gradient(to right, #2196f3, #21cbf3);
+  color: white;
+  text-align: center;
+  padding: 80px 20px 60px;
+  animation: fadeInDown 1.2s ease-out;
+}
+
+.title {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+}
+
+.intro, .features {
+  padding: 40px 20px;
+  text-align: center;
+  animation: fadeIn 1.2s ease-out;
+}
+
+.intro h2, .features h2 {
+  color: #1976d2;
+  font-size: 2rem;
+}
+
+.intro p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.feature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  width: 280px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.feature-card h3 {
+  color: #0d47a1;
+  margin-bottom: 10px;
+}
+
+footer {
+  background: #0d47a1;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+  font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.navbar {
+  background-color: #121212;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.nav-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #00bcd4;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #00bcd4;
+}
+
+
+
+
+
+</style>
+
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', () => {
+  console.log("Home Page Loaded");
+});
+</script>

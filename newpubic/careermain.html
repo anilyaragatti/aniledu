@@ -1,0 +1,229 @@
+<!--
+
+                            Online HTML Compiler.
+                Code, Compile, Run and Debug HTML program online.
+Write your code in this editor and press "Run" button to execute it.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Career Page</title>
+  <link rel="stylesheet" href="career.css" />
+</head>
+<body>
+
+
+ <!-- START: Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">EduConnect</div>
+    <ul class="nav-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="careermain.html">Career</a></li>
+      <li><a href="notes.html">Notes</a></li>
+      <li><a href="forum.html">Forum</a></li>
+      <li><a href="chatbot.html">Chatbot</a></li>
+       <li><a href="chatbot.html">college Timetable</a></li>
+        <li><a href="chatbot.html">media & Notices</a></li>
+
+    </ul>
+  </nav>
+  <!-- END: Navigation Bar -->
+
+  <header>
+    <h1 class="fade-in">Explore Your Career Path</h1>
+    <p class="slide-in">Plan your journey with resources curated just for you</p>
+  </header>
+
+  <main>
+    <section class="cards">
+      <div class="card zoom-in">
+        <h2>Roadmaps</h2>
+        <p>Step-by-step guides to become a developer, AI engineer, and more.</p>
+        <a href="careerROADMAP.html">View Roadmaps</a>
+      </div>
+      <div class="card zoom-in delay-1">
+        <h2>Learning Platforms</h2>
+        <p>Best online courses and websites to learn everything you need.</p>
+        <a href="carrer.learnigplatform.html">Explore Platforms</a>
+      </div>
+      <div class="card zoom-in delay-2">
+        <h2>DSA Sheets</h2>
+        <p>Top DSA practice sheets to master problem-solving skills.</p>
+        <a href="careerDSA.html">Start Practicing</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="career.js"></script>
+</body>
+</html>
+
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+  color: #333;
+  overflow-x: hidden;
+}
+
+header {
+  text-align: center;
+  padding: 60px 20px 20px;
+  animation: slideInDown 1s ease;
+}
+
+header h1 {
+  font-size: 3rem;
+  color: #1976d2;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+header p {
+  font-size: 1.3rem;
+  color: #444;
+  opacity: 0;
+  animation: slideIn 2s 0.5s forwards;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.5s ease;
+}
+
+.card h2 {
+  color: #0d47a1;
+}
+
+.card a {
+  text-decoration: none;
+  color: #1976d2;
+  font-weight: bold;
+  margin-top: 15px;
+  display: inline-block;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.zoom-in {
+  animation: fadeIn 1s forwards;
+}
+
+.zoom-in.delay-1 {
+  animation-delay: 0.3s;
+}
+
+.zoom-in.delay-2 {
+  animation-delay: 0.6s;
+}
+
+
+
+
+
+.navbar {
+  background-color: #121212;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.nav-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #00bcd4;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #00bcd4;
+}
+    
+</style>
+
+
+
+<script>
+// Optional: You can add scroll animation or card interaction
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card, i) => {
+    setTimeout(() => {
+      card.style.opacity = "1";
+      card.style.transform = "scale(1)";
+    }, 400 * (i + 1));
+  });
+});
+    
+</script>
