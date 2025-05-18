@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Timetable | EduConnect</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --primary-light: #93c5fd;
+      --secondary: #06b6d4;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --gray: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    /* Navigation Bar - Matches Other Pages */
+    .navbar {
+      background-color: var(--dark);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .nav-logo i {
+      color: var(--secondary);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+      position: relative;
+    }
+    
+    .nav-links li a:hover {
+      color: var(--secondary);
+    }
+    
+    .nav-links li a.active {
+      color: var(--secondary);
+    }
+    
+    .nav-links li a.active::after,
+    .nav-links li a:hover::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--secondary);
+    }
+    
+    /* Hero Section - Matches Other Pages */
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNwYXR0ZXJuKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==');
+    }
+    
+    .hero-title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      position: relative;
+      animation: fadeInDown 0.8s ease-out;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.5rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      position: relative;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    
+    /* Main Content */
+    .timetable-container {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+      color: var(--primary-dark);
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      bottom: -10px;
+      left: 20%;
+      border-radius: 2px;
+    }
+    
+    /* Week Navigation */
+    .week-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .week-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+    
+    .week-arrows {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .week-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .week-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    
+    /* Timetable Grid */
+    .timetable-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    
+    .time-header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      border-radius: 8px 8px 0 0;
+    }
+    
+    .time-slot {
+      background: white;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      min-height: 100px;
+      padding: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .time-slot:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .class-card {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .class-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .class-meta {
+      font-size: 0.85rem;
+      color: var(--dark);
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .class-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    /* Add Class Form */
+    .add-class-form {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--gray);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+    
+    /* Footer - Matches Other Pages */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      .nav-links {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .timetable-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .time-header {
+        display: none;
+      }
+      
+      .time-slot {
+        border-radius: 8px;
+      }
+      
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar - Matches Other Pages -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <i class="fas fa-book-open"></i> EduConnect
+    </div>
+    <ul class="nav-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="careermain.html">Career</a></li>
+      <li><a href="notes.html">Notes</a></li>
+      <li><a href="forum.html">Forum</a></li>
+      <li><a href="chatboat7.html">Chatbot</a></li>
+      <li><a href="collegetime77.html" class="active"> College Timetable</a></li>
+      
+    </ul>
+  </nav>
+
+  <!-- Hero Section - Matches Other Pages -->
+  <section class="hero-section">
+    <h1 class="hero-title">College Timetable</h1>
+    <p class="hero-subtitle">Stay organized with your class schedule</p>
+  </section>
+
+  <!-- Main Content -->
+  <div class="timetable-container">
+    <!-- Week Navigation -->
+    <div class="week-nav">
+      <button class="week-btn" id="prevWeekBtn">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <h2 class="week-title" id="weekTitle">Week 1 (Jan 1 - Jan 7)</h2>
+      <button class="week-btn" id="nextWeekBtn">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- Timetable Grid -->
+    <h2 class="section-title">Weekly Schedule</h2>
+    <div class="timetable-grid" id="timetableGrid">
+      <!-- Time headers -->
+      <div class="time-header">Time</div>
+      <div class="time-header">Monday</div>
+      <div class="time-header">Tuesday</div>
+      <div class="time-header">Wednesday</div>
+      <div class="time-header">Thursday</div>
+      <div class="time-header">Friday</div>
+      
+      <!-- Time slots will be dynamically inserted here -->
+    </div>
+
+    <!-- Add Class Form -->
+    <div class="add-class-form">
+      <h2 class="section-title">Add New Class</h2>
+      <form id="addClassForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="className">Class Name</label>
+            <input type="text" id="className" class="form-control" placeholder="e.g. Calculus 101" required>
+          </div>
+          <div class="form-group">
+            <label for="classDay">Day</label>
+            <select id="classDay" class="form-control" required>
+              <option value="">Select day</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="classTime">Time</label>
+            <select id="classTime" class="form-control" required>
+              <option value="">Select time</option>
+              <option value="8:00-9:30">8:00 - 9:30</option>
+              <option value="9:45-11:15">9:45 - 11:15</option>
+              <option value="11:30-13:00">11:30 - 13:00</option>
+              <option value="14:00-15:30">14:00 - 15:30</option>
+              <option value="15:45-17:15">15:45 - 17:15</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="classRoom">Room</label>
+            <input type="text" id="classRoom" class="form-control" placeholder="e.g. A-205">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="classProfessor">Professor</label>
+          <input type="text" id="classProfessor" class="form-control" placeholder="Professor's name">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Class</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer - Matches Other Pages -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 EduConnect. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Sample timetable data
+    let timetableData = {
+      currentWeek: 1,
+      weeks: {
+        1: {
+          "Monday": {
+            "8:00-9:30": [
+              {
+                id: 1,
+                name: "Calculus 101",
+                room: "A-205",
+                professor: "Dr. Smith"
+              }
+            ],
+            "11:30-13:00": [
+              {
+                id: 2,
+                name: "Physics Lab",
+                room: "Lab-3",
+                professor: "Dr. Johnson"
+              }
+            ]
+          },
+          "Tuesday": {
+            "9:45-11:15": [
+              {
+                id: 3,
+                name: "Computer Science",
+                room: "B-102",
+                professor: "Prof. Davis"
+              }
+            ]
+          },
+          "Wednesday": {
+            "14:00-15:30": [
+              {
+                id: 4,
+                name: "Literature",
+                room: "C-301",
+                professor: "Dr. Wilson"
+              }
+            ]
+          },
+          "Friday": {
+            "8:00-9:30": [
+              {
+                id: 5,
+                name: "Calculus 101",
+                room: "A-205",
+                professor: "Dr. Smith"
+              }
+            ]
+          }
+        }
+      }
+    };
+
+    // DOM Elements
+    const timetableGrid = document.getElementById('timetableGrid');
+    const weekTitle = document.getElementById('weekTitle');
+    const prevWeekBtn = document.getElementById('prevWeekBtn');
+    const nextWeekBtn = document.getElementById('nextWeekBtn');
+    const addClassForm = document.getElementById('addClassForm');
+
+    // Time slots
+    const timeSlots = [
+      "8:00-9:30",
+      "9:45-11:15",
+      "11:30-13:00",
+      "14:00-15:30",
+      "15:45-17:15"
+    ];
+
+    // Initialize timetable
+    document.addEventListener('DOMContentLoaded', () => {
+      renderTimetable();
+      
+      // Event listeners
+      prevWeekBtn.addEventListener('click', () => {
+        timetableData.currentWeek = Math.max(1, timetableData.currentWeek - 1);
+        updateWeekTitle();
+        renderTimetable();
+      });
+      
+      nextWeekBtn.addEventListener('click', () => {
+        timetableData.currentWeek += 1;
+        if (!timetableData.weeks[timetableData.currentWeek]) {
+          timetableData.weeks[timetableData.currentWeek] = {};
+        }
+        updateWeekTitle();
+        renderTimetable();
+      });
+      
+      addClassForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        addNewClass();
+      });
+    });
+
+    // Render timetable
+    function renderTimetable() {
+      const currentWeekData = timetableData.weeks[timetableData.currentWeek];
+      
+      // Clear existing time slots (except headers)
+      while (timetableGrid.children.length > 6) {
+        timetableGrid.removeChild(timetableGrid.lastChild);
+      }
+      
+      // Add time slots
+      timeSlots.forEach(timeSlot => {
+        // Time label
+        const timeCell = document.createElement('div');
+        timeCell.className = 'time-slot';
+        timeCell.innerHTML = `<strong>${timeSlot}</strong>`;
+        timetableGrid.appendChild(timeCell);
+        
+        // Days
+        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+        days.forEach(day => {
+          const dayCell = document.createElement('div');
+          dayCell.className = 'time-slot';
+          
+          if (currentWeekData[day] && currentWeekData[day][timeSlot]) {
+            currentWeekData[day][timeSlot].forEach(classItem => {
+              const classCard = document.createElement('div');
+              classCard.className = 'class-card';
+              classCard.innerHTML = `
+                <div class="class-title">${classItem.name}</div>
+                <div class="class-meta">
+                  <span><i class="fas fa-door-open"></i> ${classItem.room}</span>
+                  <span><i class="fas fa-user-tie"></i> ${classItem.professor}</span>
+                </div>
+              `;
+              dayCell.appendChild(classCard);
+            });
+          }
+          
+          timetableGrid.appendChild(dayCell);
+        });
+      });
+    }
+
+    // Add new class
+    function addNewClass() {
+      const className = document.getElementById('className').value;
+      const classDay = document.getElementById('classDay').value;
+      const classTime = document.getElementById('classTime').value;
+      const classRoom = document.getElementById('classRoom').value;
+      const classProfessor = document.getElementById('classProfessor').value;
+      
+      if (!className || !classDay || !classTime) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      
+      const currentWeekData = timetableData.weeks[timetableData.currentWeek];
+      
+      if (!currentWeekData[classDay]) {
+        currentWeekData[classDay] = {};
+      }
+      
+      if (!currentWeekData[classDay][classTime]) {
+        currentWeekData[classDay][classTime] = [];
+      }
+      
+      const newClass = {
+        id: Date.now(),
+        name: className,
+        room: classRoom,
+        professor: classProfessor
+      };
+      
+      currentWeekData[classDay][classTime].push(newClass);
+      renderTimetable();
+      addClassForm.reset();
+    }
+
+    // Update week title
+    function updateWeekTitle() {
+      weekTitle.textContent = `Week ${timetableData.currentWeek}`;
+    }
+  </script>
+</body>
+</html>
