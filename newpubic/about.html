@@ -1,245 +1,537 @@
-<!--
-
-                            Online HTML Compiler.
-                Code, Compile, Run and Debug HTML program online.
-Write your code in this editor and press "Run" button to execute it.
-
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us</title>
-  <link rel="stylesheet" href="about.css" />
+  <title>About Us | EduConnect</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --primary-light: #93c5fd;
+      --secondary: #06b6d4;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --gray: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    /* Navigation Bar - Consistent with other pages */
+    .navbar {
+      background-color: var(--dark);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .nav-logo i {
+      color: var(--secondary);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+      position: relative;
+    }
+    
+    .nav-links li a:hover {
+      color: var(--secondary);
+    }
+    
+    .nav-links li a.active {
+      color: var(--secondary);
+    }
+    
+    .nav-links li a.active::after,
+    .nav-links li a:hover::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--secondary);
+    }
+    
+    /* Hero Section - Consistent with other pages */
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNwYXR0ZXJuKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==');
+    }
+    
+    .hero-title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      position: relative;
+      animation: fadeInDown 0.8s ease-out;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.5rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      position: relative;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    
+    /* Main Content Container */
+    .content-container {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+      color: var(--primary-dark);
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      bottom: -10px;
+      left: 20%;
+      border-radius: 2px;
+    }
+    
+    /* About Cards */
+    .about-cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .about-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+      transition: all 0.3s ease;
+      flex: 1 1 45%;
+      min-width: 300px;
+      border-top: 4px solid var(--primary);
+    }
+    
+    .about-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .about-card h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .about-card p {
+      color: var(--dark);
+      line-height: 1.7;
+    }
+    
+    /* Team Section - Two Rows Layout */
+    .team-section {
+      margin: 4rem 0;
+      width: 100%;
+    }
+    
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .member {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      width: 220px;
+      transition: all 0.3s ease;
+    }
+    
+    .member:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+    
+    .member img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary-light);
+      margin-bottom: 1.5rem;
+    }
+    
+    .member p {
+      font-weight: 600;
+      color: var(--primary-dark);
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+    }
+    
+    /* College Card */
+    .college-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+      margin: 3rem auto;
+      max-width: 800px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .college-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .college-img-container {
+      flex-shrink: 0;
+      width: 180px;
+      height: 180px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 4px solid var(--primary-light);
+    }
+    
+    .college-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .college-info h2 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
+    
+    .college-info p {
+      color: var(--dark);
+      margin-bottom: 1rem;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+    
+    .map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: all 0.3s ease;
+    }
+    
+    .map-link:hover {
+      color: var(--primary-dark);
+      transform: translateX(5px);
+    }
+    
+    /* Footer - Consistent with other pages */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .member {
+        width: 200px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .member {
+        width: 180px;
+      }
+      .member img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      .nav-links {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .about-card {
+        flex: 1 1 100%;
+      }
+      
+      .college-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .college-img-container {
+        margin-bottom: 1rem;
+        width: 150px;
+        height: 150px;
+      }
+      
+      .member {
+        width: 160px;
+      }
+      
+      .member img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .member {
+        width: 140px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .member {
+        width: 120px;
+        padding: 1.5rem 1rem;
+      }
+      .member img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  </style>
 </head>
 <body>
-
- <!-- START: Navigation Bar -->
+  <!-- Navigation Bar - Consistent with other pages -->
   <nav class="navbar">
-    <div class="nav-logo">EduConnect</div>
+    <div class="nav-logo">
+      <i class="fas fa-book-open"></i> EduConnect
+    </div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="about.html" class="active">About</a></li>
       <li><a href="careermain.html">Career</a></li>
       <li><a href="notes.html">Notes</a></li>
       <li><a href="forum.html">Forum</a></li>
       <li><a href="chatboat7.html">Chatbot</a></li>
-       <li><a href="collegetime77.html">college timetable</a></li>
-         
-
+      <li><a href="collegetime77.html">College Timetable</a></li>
     </ul>
   </nav>
-  <!-- END: Navigation Bar -->
 
-
-  <header>
-    <h1 class="fade-in">About Our Project</h1>
-    <p class="slide-in">Empowering students with a smarter education platform</p>
-  </header>
-
-  <section class="vision fade-in">
-    <h2>Our Vision</h2>
-    <p>
-      Our goal is to build a one-stop platform for students that simplifies communication, learning, and growth through smart tools like chatbots, notes sharing, forums, and career guidance.
-    </p>
+  <!-- Hero Section - Consistent with other pages -->
+  <section class="hero-section">
+    <h1 class="hero-title">About EduConnect</h1>
+    <p class="hero-subtitle">Empowering students with smarter education tools</p>
   </section>
 
-  <section class="team slide-in">
-    <h2>Meet Our Team</h2>
-    <div class="team-members">
-      <div class="member">
-        <img src="anil.jpg" alt="Team Member 1" />
-        <p>Anil</p>
+  <!-- Main Content -->
+  <div class="content-container">
+    <h2 class="section-title">Our Mission</h2>
+    
+    <div class="about-cards-container">
+      <div class="about-card">
+        <h2>Our Goal</h2>
+        <p>
+          Our goal is to build a one-stop platform for students that simplifies communication, learning, and growth through smart tools like AI-powered chatbots, notes sharing, interactive forums, and personalized career guidance. We aim to empower students and educators by providing a seamless digital experience that enhances productivity, collaboration, and academic performance.
+        </p>
       </div>
-      <div class="member">
-        <img src="WhatsApp Image 2025-05-18 at 07.10.56_8372863a.jpg" alt="Team Member 2" />
-        <p>Anupriya</p>
-      </div>
-      <div class="member">
-        <img src="kulli.jpg" alt="Team Member 3" />
-        <p>Shrusti</p>
-      </div>
-      <div class="member">
-        <img src="gokul.jpg" alt="Team Member 4" />
-        <p>Gokul</p>
-      </div>
-      <div class="member">
-        <img src="madhu.jpg" alt="Team Member 5" />
-        <p>Madhu</p>
-      </div>
-      <div class="member">
-        <img src="druti.jpg" alt="Team Member 6" />
-        <p>Druthi</p>
-      </div>
-      <div class="member">
-        <img src="vaibhav.jpg" alt="Team Member 7" />
-        <p>Vaibhav</p>
+      <div class="about-card">
+        <h2>Our Vision</h2>
+        <p>
+          Our vision is to revolutionize education by creating a connected and inclusive digital ecosystem where every student, regardless of background, has access to quality resources, mentorship, and opportunities. We envision EduConnect as a catalyst for smarter learning, stronger academic communities, and a brighter future driven by innovation and knowledge.
+        </p>
       </div>
     </div>
-  </section>
 
-  <script src="about.js"></script>
+    <div class="team-section">
+      <h2 class="section-title">Meet Our Team</h2>
+      <div class="team-members">
+        <!-- First Row - 4 members -->
+        <div class="member">
+          <img src="anil.jpg" alt="Anil" />
+          <p>Anil</p>
+        </div>
+        <div class="member">
+          <img src="WhatsApp Image 2025-05-18 at 07.10.56_8372863a.jpg" alt="Anupriya" />
+          <p>Anupriya</p>
+        </div>
+        <div class="member">
+          <img src="kulli.jpg" alt="Shrusti" />
+          <p>Shrusti R M</p>
+        </div>
+        <div class="member">
+          <img src="gokul.jpg" alt="Gokul" />
+          <p>Gokul</p>
+        </div>
+        
+        <!-- Second Row - 3 members -->
+        <div class="member">
+          <img src="madhu.jpg" alt="Madhu" />
+          <p>Madhu N</p>
+        </div>
+        <div class="member">
+          <img src="druti.jpg" alt="Druthi" />
+          <p>S Druthi</p>
+        </div>
+        <div class="member">
+          <img src="keerti.jpg" alt="Vaibhav" />
+          <p>Keerthana R</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="college-card">
+      <div class="college-img-container">
+        <img src="clg.jpg" alt="City Engineering College" class="college-img"/>
+      </div>
+      <div class="college-info">
+        <h2>City Engineering College, Bangalore</h2>
+        <p>
+          City Engineering College<br>
+          Doddakallasandra, Off Kanakapura Road,<br>
+          Next to Gokulam Apartment,<br>
+          Bangalore – 560 062, India
+        </p>
+        <a href="https://cityengineeringcollege.ac.in/" target="_blank" class="map-link">
+          Visit College Website <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer - Consistent with other pages -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 EduConnect. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Simple animation trigger
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.about-card, .member, .college-card');
+      
+      cards.forEach((card, index) => {
+        // Add slight delay to each card's animation
+        card.style.animation = `fadeInUp 0.5s ease-out ${index * 0.1}s both`;
+      });
+    });
+  </script>
 </body>
-
-
-<style>
-    body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f1f8ff;
-  color: #333;
-  overflow-x: hidden;
-}
-
-header {
-  text-align: center;
-  padding: 50px 20px 20px;
-  background: linear-gradient(135deg, #bbdefb, #e3f2fd);
-}
-
-header h1 {
-  font-size: 3rem;
-  color: #0d47a1;
-  opacity: 0;
-  animation: fadeIn 1.5s forwards;
-}
-
-header p {
-  font-size: 1.2rem;
-  color: #444;
-  opacity: 0;
-  animation: slideIn 2s 0.3s forwards;
-}
-
-.vision {
-  padding: 40px 20px;
-  text-align: center;
-  background: white;
-  opacity: 0;
-  animation: fadeIn 1.5s 0.5s forwards;
-}
-
-.vision h2 {
-  color: #1976d2;
-  margin-bottom: 10px;
-}
-
-.vision p {
-  max-width: 800px;
-  margin: 0 auto;
-  font-size: 1.1rem;
-}
-
-.team {
-  padding: 40px 20px;
-  background: #e3f2fd;
-  opacity: 0;
-  animation: slideIn 2s 0.8s forwards;
-}
-
-.team h2 {
-  text-align: center;
-  color: #0d47a1;
-  margin-bottom: 20px;
-}
-
-.team-members {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-}
-
-.member {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  text-align: center;
-  width: 150px;
-  transition: transform 0.3s;
-}
-
-.member img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.member p {
-  margin-top: 10px;
-  font-weight: bold;
-  color: #1976d2;
-}
-
-.member:hover {
-  transform: scale(1.05);
-}
-
-/* Animations */
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-
-.navbar {
-  background-color: #121212;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-}
-
-.nav-logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #00bcd4;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.nav-links li a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 16px;
-  transition: color 0.3s ease;
-}
-
-.nav-links li a:hover {
-  color: #00bcd4;
-}
-
-</style>
 </html>
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-  // Optionally enhance animations or add dynamic features
-  console.log("About page loaded");
-});
-</script>
