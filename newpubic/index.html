@@ -205,6 +205,34 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
     
+    /* About Card - New Section */
+    .about-card-main {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(33, 150, 243, 0.10), 0 1.5px 6px rgba(0,0,0,0.04);
+      padding: 2.5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto 3rem auto;
+      text-align: left;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    
+    .about-card-main:hover {
+      box-shadow: 0 12px 32px rgba(33, 150, 243, 0.18), 0 2px 8px rgba(0,0,0,0.06);
+      transform: translateY(-6px) scale(1.01);
+    }
+    
+    .about-card-main .section-title {
+      text-align: left;
+      margin-left: 0;
+      margin-bottom: 1.5rem;
+    }
+    
+    .about-card-main .intro-text {
+      margin-bottom: 1.2rem;
+      max-width: 100%;
+    }
+    
     /* Footer - Consistent with other pages */
     footer {
       background: var(--dark);
@@ -295,16 +323,18 @@
 
   <!-- Intro Section -->
   <section class="content-section">
-    <h2 class="section-title">About the Website</h2>
-    <p class="intro-text">
-      EduConnect is a centralized educational platform designed to help students and faculty communicate, collaborate, and grow together. Our mission is to simplify the learning process through technology.
-    </p>
-    <p class="intro-text">
-      We provide a user-friendly interface that bridges the gap between students and educators, enabling real-time sharing of notes, announcements, media, and resources. With features like a collaborative forum, AI-powered chatbot, dynamic timetable, and career guidance hub, EduConnect aims to be the one-stop solution for academic success.
-    </p>
-    <p class="intro-text">
-      Our platform supports seamless interaction, encourages knowledge sharing, and fosters a sense of academic community. Whether you're a student seeking support or a teacher sharing vital information, EduConnect empowers everyone to stay connected and focused on what truly matters — learning and growth.
-    </p>
+    <div class="about-card-main">
+      <h2 class="section-title">About the Website</h2>
+      <p class="intro-text">
+        EduConnect is a centralized educational platform designed to help students and faculty communicate, collaborate, and grow together. Our mission is to simplify the learning process through technology.
+      </p>
+      <p class="intro-text">
+        We provide a user-friendly interface that bridges the gap between students and educators, enabling real-time sharing of notes, announcements, media, and resources. With features like a collaborative forum, AI-powered chatbot, dynamic timetable, and career guidance hub, EduConnect aims to be the one-stop solution for academic success.
+      </p>
+      <p class="intro-text">
+        Our platform supports seamless interaction, encourages knowledge sharing, and fosters a sense of academic community. Whether you're a student seeking support or a teacher sharing vital information, EduConnect empowers everyone to stay connected and focused on what truly matters — learning and growth.
+      </p>
+    </div>
   </section>
 
   <!-- Features Section -->
